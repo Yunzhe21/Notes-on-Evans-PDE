@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+
+\title{Notes on Evans PDE, Chapter 5}
+\author{Yunzhe Zheng}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+\section{On Sobolev embeddings}
+
+\indent\indent We observe various inequalities involving $u\in W^{k, p}$ and other more regular spaces ($\mathscr{L}^q$, Hölder Spaces), where the Sobolev norm acts as the upper-bound, to show how Sobolev spaces can be included (embedded) in these spaces.
+
+\subsection{Gagliardo-Nirenberg-Sobolev inequality}
+
+\indent\indent This inequality aims at embedding $W^{1, p}$ into certain $\mathscr{L}^{q}$. Notice that $p$ should be in $[1, n)$. \\
+\indent The idea of the proof is to prove the ineqaulity for $\mathscr{C}^1_c$, then utilize the extension Theorem and approximation Theorem introduced before to obtain the desired result. 
+
+\subsubsection{Case of $u\in\mathscr{C}^1_{c}$}
+
+\newtheorem{Th}{Theorem}
+
+\begin{Th}
+    Assume $1\leq p<n$. There exists a constant $C$, depending only on $p$ and $n$, such that
+    $$
+    \|u\|_{\mathscr{L}^{p^*}(\mathbb{R}^{n})}\leq C\|Du\|_{L^{p}(\mathbb{R}^{n})}
+    $$
+    for all $u\in\mathscr{C}^{1}_{c}(\mathbb{R}^n)$.
+\end{Th}
+
+\begin{proof}
+    Sketch: First proof for $p=1$ by inductively using Hölder inequality, then consider $v=|u|^{\gamma}$, where $\gamma=\frac{p(n-1)}{n-p}>1$, and estimate 
+    $$
+    \left(\int_{\mathbb{R}^n}|u|^{\frac{\gamma n}{n-1}}dx\right)^{\frac{n}{n-1}}
+    $$
+\end{proof}
+The proof uses Hölder's inequality secretly and intensively, to give one example, let's take a look at the inequality under $(12)$: 
+
+\begin{align*}
+    &\left(\int_{-\infty}^{\infty}|Du|dy_1\right)^{\frac{1}{n-1}}\int_{-\infty}^{\infty}\prod_{i=2}^{n}\left(\int_{-\infty}^{\infty}|Du|dy_i\right)^{\frac{1}{n-1}}dx_1 \\
+    \leq& \left(\int_{-\infty}^{\infty}|Du|dy_1\right)^{\frac{1}{n-1}}\left(\prod_{i=2}^{n}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}|Du|dx_1dy_i\right)^{\frac{1}{n-1}}
+\end{align*}
+where we take $f_i=\left(\int_{-\infty}^{\infty}|Du|dy_i\right)^{\frac{1}{n-1}}\in L^{n-1}$ for $i=2, \dots, n$, and apply Hölder inequality directly. Eventually we may get
+$$
+\int_{\mathbb{R}^n}|u|^{\frac{n}{n-1}}dx\leq\left(\int_{\mathbb{R}^n}|Du|dx\right)^{\frac{n}{n-1}}
+$$
+
+\subsubsection{Case of $u\in W^{1,p}$, $1\leq p< n$}
+
+\begin{Th}
+    Let $U$ be a bounded, open subset of $\mathbb{R}^n$, and suppose that $\partial U$ is $\mathscr{C}^1$. Assume $1\leq p<n$, and $u\in W^{1, p}(U)$. Then $u\in \mathscr{L}^{p^*}$, with the estimate $\|u\|_{\mathscr{L}^{p^*}}\leq C\|u\|_{W^{1, p}(U)}$.
+\end{Th}
+
+\begin{proof}
+    Sketch: 
+\end{proof}
+
+\subsubsection{Case of $u\in W^{1,p}_{0}$, $1\leq p< n$}
+
+
+\subsection{Morrey's inequality}
+
+\subsubsection{Case of $u\in \mathscr{C}^{1}$}
+
+\subsubsection{Case of $u\in W^{1, p}$, $n< p\leq \infty$}
+
+\subsection{Boundary Case of $p=n$}
+\end{document}
