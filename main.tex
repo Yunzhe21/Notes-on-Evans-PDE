@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathrsfs}
+\usepackage{stix}
 
 \title{Notes on Evans PDE, Chapter 5}
 \author{Yunzhe Zheng}
@@ -58,16 +59,43 @@ $$
 \end{Th}
 
 \begin{proof}
-    Sketch: 
+    Sketch: Apply the Extension Theorem to extend $u$ from $U$ to $\mathbb{R}^n$, where the extended function $\overline{u}=u$ in $U$ and has compact support, and also by Approximation Theorem, we can find a sequence of $\mathscr{C}^{\infty}_{c}(\mathbb{R}^n)$ functions such that $u_m\to\overline{u}$ in $W^{1, p}(\mathbb{R}^n)$.\\
+    \indent Previous Theorem implies following two estimates $\|u_m-u_l\|_{\mathscr{L}^{p^*}}\leq C\|Du_m-Du_l\|_{\mathscr{L}^{p}(\mathbb{R}^n)}$ and $\|u_{m}\|_{\mathscr{L}^{p^*}(\mathbb{R}^n)}\leq C\|Du_m\|_{\mathscr{L}^{p}(\mathbb{R}^n)}$ (1), where the first estimate yields $u_m\to\overline{u}$ in $\mathscr{L}^{p^*}$, thus we have $\|u_m\|_{\mathscr{L}^{p^*}}\to\|\overline{u}\|_{\mathscr{L}^{p^*}} (2)$ by the fact that $|\|u_m\|_{\mathscr{L}^{p^*}}-\|\overline{u}\|_{\mathscr{L}^{p^*}}|\leq \|u_m-\overline{u}\|_{\mathscr{L}^{p^*}}$. Also, convergence in $W^{1,p}$ implies that $\|Du_m-D\overline{u}\|_{\mathscr{L}^p}$, thus $\|Du_m\|_{\mathscr{L}^{p}}\to\|D\overline{u}\|_{\mathscr{L}^{p}}$ (3). Combining (1) (2) (3) we obtain the desired result.
 \end{proof}
+
+One remark worth noting about the application of Extension Theorem is that although in the statement of Extension Theorem it is not explicitly mentioned that the extended function is compactly supported, but actually in our context it is automatic. 
+
+\newtheorem{Def}{Definition}[section]
+\begin{Def}
+    The Support a function is the smallest closed set containing all points that are not mapped to $0$.
+\end{Def}
+
+Since in our context, the domain is always bounded, thus the support is always compact.
 
 \subsubsection{Case of $u\in W^{1,p}_{0}$, $1\leq p< n$}
 
+The advantage of $W^{1,p}_0$ is that not only can we embed it into $\mathscr{L}^{p^*}$ for specific $p^*$ depending on $p$, but also we can embed it into all $\mathscr{L}^{q}$ for $1\leq q\leq p^*$.
+
+Refer to textbook for the exact statement and proof.
 
 \subsection{Morrey's inequality}
 
+Unlike the G-N-S inequality, Morrey's inequality aims at solving the embedding problem for $n<p\leq \infty$ into Holder space.
+
 \subsubsection{Case of $u\in \mathscr{C}^{1}$}
 
+\newtheorem{Lem}{Lemma}
+\begin{Lem}
+    There exists a constant $C$ depending on $n$ such that 
+    $$
+    \intbar_{B(x,r)}|u(y)-u(x)|dy\leq\int_{B(x,r)}\frac{|Du(y)|}{|y-x|^{n-1}}dy
+    $$
+    for $u\in\mathscr{C}^1(\mathbb{R}^n)$.
+\end{Lem} 
+
+This is very important estimate, see text for proof.
+
+I shall not repeat the statement of Morrey's inequality here, but there is one 
 \subsubsection{Case of $u\in W^{1, p}$, $n< p\leq \infty$}
 
 \subsection{Boundary Case of $p=n$}
