@@ -74,13 +74,13 @@ Since in our context, the domain is always bounded, thus the support is always c
 
 \subsubsection{Case of $u\in W^{1,p}_{0}$, $1\leq p< n$}
 
-The advantage of $W^{1,p}_0$ is that not only can we embed it into $\mathscr{L}^{p^*}$ for specific $p^*$ depending on $p$, but also we can embed it into all $\mathscr{L}^{q}$ for $1\leq q\leq p^*$.
+\indent\indent The advantage of $W^{1,p}_0$ is that not only can we embed it into $\mathscr{L}^{p^*}$ for specific $p^*$ depending on $p$, but also we can embed it into all $\mathscr{L}^{q}$ for $1\leq q\leq p^*$.
 
 Refer to textbook for the exact statement and proof.
 
 \subsection{Morrey's inequality}
 
-Unlike the G-N-S inequality, Morrey's inequality aims at solving the embedding problem for $n<p\leq \infty$ into Holder space.
+\indent\indent Unlike the G-N-S inequality, Morrey's inequality aims at solving the embedding problem for $n<p\leq \infty$ into Holder space.
 
 \subsubsection{Case of $u\in \mathscr{C}^{1}$}
 
@@ -93,10 +93,86 @@ Unlike the G-N-S inequality, Morrey's inequality aims at solving the embedding p
     for $u\in\mathscr{C}^1(\mathbb{R}^n)$.
 \end{Lem} 
 
-This is very important estimate, see text for proof.
+This is very important estimate, see text for proof. \\
 
-I shall not repeat the statement of Morrey's inequality here, but there is one 
+I shall not repeat the statement of Morrey's inequality here, but there is another important estimate in the proof that worth mentioning:
+$$
+    |u(x)-u(y)|\leq Cr^{1-\frac{n}{p}}\|u\|_{\mathscr{L}^p(\mathbb{R}^n)}
+$$ where $r=|x-y|$. In the remark after Morrey's inequality, the author claims another similar estimate without proof
+$$
+    |u(y)-u(x)|\leq Cr^{1-\frac{n}{p}}\left(\int_{B(x,2r)}|Du(z)|^p\right)^{1/p}
+$$
+
+The proof of this estimate is actually immediate once we replace all $r$ by $2r$ in the proof of the above estimate, see text for reference.
+
 \subsubsection{Case of $u\in W^{1, p}$, $n< p\leq \infty$}
 
-\subsection{Boundary Case of $p=n$}
+\indent\indent We again utilize Extension Theorem and Approximtion Theorem, the proof is almost identical to the case of G-N-S inequality.
+
+\subsection{Borderline Case of $p=n$}
+
+\indent\indent This part resolves the problem of the boundary case where $p=n$, which I believe Evans book didn't discuss explicitly. The book I'm going to refer to is "Functional Analysis, Sobolev Spaces and Partial Differential Equations" by Haim Brezis.
+
+To achieve the border case, we need a more sophisticated estimate:
+
+\begin{Lem}
+    Let $N\geq 2$ and let $f_1, f_2, \dots, f_N\in\mathscr{L}^{N-1}(\mathbb{R}^{N-1})$. For $x\in\mathbb{R}^N$ and $1\leq i\leq N$ set
+    $$
+    \tilde{x}_{i} = (x_1, x_2, \dots, x_{i-1}, x_{i+1}, \dots, x_N)\in\mathbb{R}^{N-1}
+    $$
+    then the function $f(x)=f_{1}(\tilde{x}_1)f_2(\tilde{x}_2)\dots f_N(\tilde{x}_N)$, $x\in\mathbb{R}^N$ belongs to $\mathscr{L}^1(\mathbb{R}^n)$ and with the inequality 
+    $$    \|f\|_{\mathscr{L}^1(\mathbb{R}^N)}\leq\prod_{i=1}^N\|f_i\|_{\mathscr{L}^{N-1}(\mathbb{R}^{N-1})}
+    $$.
+\end{Lem}
+
+\begin{proof}
+    The case of $N=2$ is simply Minkowski inequality. For $N=3$, we have 
+    \begin{align*}
+        \int_{\mathbb{R}}|f(x)|dx_3 &= |f_{3}(x_1, x_2)|\int_{\mathbb{R}}|f_1(x_2, x_3)||f_{2}(x_1, x_3)|dx_3  \\
+        &\leq |f_3(x_1, x_2)|\left(\int_{\mathbb{R}}|f_{1}(x_2, x_3)|^2dx_3\right)^{1/2}\left(\int_{\mathbb{R}}|f_{2}(x_1, x_3)|^2dx_3\right)^{1/2} \\
+    \end{align*}
+    Integrating over $x_1, x_2$ and apply Cauchy-Schwarz inequality
+    \begin{align*}
+    &\int_{\mathbb{R}}\int_{\mathbb{R}}|f(x)|dx_3dx_1\leq \left(\int_{\mathbb{R}}|f_{1}(x_2, x_3)|^2dx_3\right)^{1/2}\int_\mathbb{R}|f_3(x_1, x_2)|\left(\int_{\mathbb{R}}|f_{2}(x_1, x_3)|^2dx_3\right)^{1/2}dx_1 \\
+    &\leq \left(\int_{\mathbb{R}}|f_{1}(x_2, x_3)|^2dx_3\right)^{1/2}\left(\int_{\mathbb{R}}|f_3(x_1, x_2)|^2dx_1\right)^{1/2}\left(\int_{\mathbb{\mathbb{R}}}\int_{\mathbb{R}}|f_2(x_1, x_3)|^2dx_3dx_1\right)^{1/2}
+    \end{align*}
+    Then 
+    \begin{align*}
+    \int_{\mathbb{R}}\int_{\mathbb{R}}\int_{\mathbb{R}}|f(x)|dx_3dx_1dx_2&\leq\left(\int_{\mathbb{R}^2}|f_2(x_1, x_3)|^2dx_1dx_3\right)^{1/2}\left(\int_{\mathbb{R}}\int_{\mathbb{R}}|f_1(x_2, x_3)|^2dx_2dx_3\right)^{1/2} \\
+    &\left(\int_{\mathbb{R}}\int_{\mathbb{R}}|f_3(x_1, x_2)|dx_1dx_2\right)^{1/2}
+    \end{align*} which finish the case of $N=3$. \\
+    For general $N$, we use induction and prove for $N+1$
+    \begin{align}
+    \int_{\mathbb{R}^{N+1}}|f(x)|dx\leq \|f_{N+1}\|_{\mathscr{L}^N(\mathbb{R}^N)}\left[\int_{\mathbb{R}^N}|f_{1}f_{2}\cdots f_{N}|^{N'}dx_1dx_2\dots dx_N\right]^{1/N'}
+    \end{align}
+    where $N'=N/(N-1)$. Then by induction step, we have
+    \begin{align}
+    \int_{\mathbb{R}^N}|f_1|^{N'}\cdots|f_N|^{N'}dx_1\dots dx_N\leq \prod_{i=1}^{N}\left\||f_{i}|^{N'}\right\|_{\mathscr{L}^{N-1}(\mathbb{R}^{N-1})}=\prod_{i=1}^{N}\|f_{i}\|^{N'}_{\mathscr{L}^{N}(\mathbb{R}^{N-1})}
+    \end{align}
+    where the last inequality follows from 
+    $$
+    \left[\int_{\mathbb{R}^{N-1}}\left(|f_i|^{N/N-1}\right)^{N-1}\right]^{\frac{1}{N-1}}=\left(\int_{\mathbb{R}^{N-1}}|f_i|^{N}\right)^{\frac{1}{N}\cdot\frac{N}{N-1}}=\|f_i\|_{\mathscr{L}^{N}(\mathbb{R}^{N-1})}^{N'}
+    $$
+    \indent Notice that in the induction step, the author didn't prove that $|f_i|^{N'}$ is in $\mathscr{L}^{N-1}$, which is a crucial criteria for induction, but that's immediate, as we see
+    $$
+    \left[\int_{\mathbb{R}^{N-1}}\left(|f_i|^{\frac{N}{N-1}}\right)^{N-1}\right]^{\frac{1}{N-1}}=\left[\int_{\mathbb{R}^{N-1}}|f_i|^N\right]^{\frac{1}{N-1}}<\infty
+    $$
+    Plug estimate $(2)$ into estimate $(1)$ and we are done.
+\end{proof} 
+
+Now we are heading to the more sophisticated estimate that eventually leads us to the borderline case.
+
+\begin{Lem}
+    Let $m\geq 1$, and $u\in\mathscr{C}^{1}_{c}(\mathbb{R}^n)$, we have following estimate
+    $$
+    \|u\|_{mN/(N-1)}^{m}\leq m\prod_{i=1}^{N}\left\||u|^{m-1}\frac{\partial u}{\partial x_i}\right\|_{1}^{1/N}
+    $$
+\end{Lem}
+
+\subsection{General Sobolev inequality}
+
+\indent\indent In this section, we generalize our embedding by considering not only $W^{1, p}$ spaces but $W^{k,p}$ spaces, an in turn we get (as expected) more complicated embeddings. 
+
+
+
 \end{document}
