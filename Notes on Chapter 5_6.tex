@@ -6,9 +6,9 @@
 \usepackage{mathrsfs}
 \usepackage{stix}
 
-\title{Notes on Evans PDE, Chapter 5}
+\title{Notes on Evans PDE, Chapter 5.6}
 \author{Yunzhe Zheng}
-\date{2025}
+\date{2025.7}
 
 \begin{document}
 
@@ -16,12 +16,12 @@
 
 \section{On Sobolev embeddings}
 
-\indent\indent We observe various inequalities involving $u\in W^{k, p}$ and other more regular spaces ($\mathscr{L}^q$, Hölder Spaces), where the Sobolev norm acts as the upper-bound, to show how Sobolev spaces can be included (embedded) in these spaces.
+\indent\indent We study various inequalities involving $u\in W^{k, p}$ and other more regular spaces ($\mathscr{L}^q$, Hölder Spaces), where the Sobolev norm acts as the upper-bound, to show how Sobolev spaces can be included (embedded) in these spaces.
 
 \subsection{Gagliardo-Nirenberg-Sobolev inequality}
 
 \indent\indent This inequality aims at embedding $W^{1, p}$ into certain $\mathscr{L}^{q}$. Notice that $p$ should be in $[1, n)$. \\
-\indent The idea of the proof is to prove the ineqaulity for $\mathscr{C}^1_c$, then utilize the extension Theorem and approximation Theorem introduced before to obtain the desired result. 
+\indent The idea of the proof is to first prove the inequality for $\mathscr{C}^1_c$, then utilize the extension Theorem and approximation Theorem introduced before to obtain the desired result. 
 
 \subsubsection{Case of $u\in\mathscr{C}^1_{c}$}
 
@@ -163,16 +163,94 @@ To achieve the border case, we need a more sophisticated estimate:
 Now we are heading to the more sophisticated estimate that eventually leads us to the borderline case.
 
 \begin{Lem}
-    Let $m\geq 1$, and $u\in\mathscr{C}^{1}_{c}(\mathbb{R}^n)$, we have following estimate
+    Let $m, p\geq 1$, and $u\in\mathscr{C}^{1}_{c}(\mathbb{R}^N)$, we have following estimate
     $$
-    \|u\|_{mN/(N-1)}^{m}\leq m\prod_{i=1}^{N}\left\||u|^{m-1}\frac{\partial u}{\partial x_i}\right\|_{1}^{1/N}
+    \|u\|_{mN/(N-1)}^{m}\leq m\prod_{i=1}^{N}\left\||u|^{m-1}\frac{\partial u}{\partial x_i}\right\|_{\mathscr{L}^1}^{1/N}\leq m\|u\|_{p'(m-1)}^{m-1}\prod_{i=1}^{N}\left\|\frac{\partial u}{\partial x_i}\right\|_{\mathscr{L}^p}^{1/N}
     $$
 \end{Lem}
+
+\begin{proof}
+    \begin{align*}
+    |u(x_1, x_2, \dots, x_N)|=\left|\int_{-\infty}^{x_1}\frac{\partial u}{\partial x_1}(t, x_2, \dots, x_N)dt\right|\leq\int^{x_1}_{-\infty}\left|\frac{\partial u}{\partial x_1}\right|dt\leq\int_{-\infty}^{\infty}\left|\frac{\partial u}{\partial x_1}\right|dt\equiv f_i
+    \end{align*}
+    then $|u|^N\leq\prod_{i=1}^{N}f_i$. Now apply Lemma 2, we have
+    \begin{align*}
+        \int_{\mathbb{R}^N}|u|^{N/(N-1)}dx\leq \int_{\mathbb{R}^N}\left(\prod_{i=1}^{N}[f_{i}(\tilde{x}_{i})]^{1/(N-1)}\right)dx&\leq\prod_{i=1}^{N}\left[\int_{\mathbb{R}^{N-1}}\left(f_{i}(\tilde{x}_{i})^{1/(N-1)}\right)^{N-1}dx\right]^{1/(N-1)}\\
+        &=\prod_{i=1}^{N}\|f_{i}\|_{\mathscr{L}^1(\mathbb{R}^{N-1})}^{1/(N-1)} \\
+        &=\prod_{i=1}^{N}\left\|\frac{\partial u}{\partial x_i}\right\|_{\mathscr{L}^{1}(\mathbb{R}^N)}^{1/(N-1)}
+    \end{align*}
+    Consequently, we have 
+    \begin{align}
+        \|u\|_{N/N-1}\leq\prod_{i=1}^{N}\left\|\frac{\partial u}{\partial x_i}\right\|_{\mathscr{L}^{1}(\mathbb{R}^N)}^{1/N}
+    \end{align}
+    
+    Now apply (3) to $|u|^{m-1}u$ for $m\geq 1$, we have 
+    \begin{align*}
+        \left\||u|^{m-1}u\right\|_{N/N-1}&=\left(\int(|u|^{m})^{N/N-1}\right)^{\frac{N-1}{mN}\cdot m}=\|u\|_{mN/(N-1)}^{m} \\
+        &\leq \prod_{i=1}^{N}\left\|\frac{\partial}{\partial x_i}|u|^{m-1}u\right\|_1^{1/N}=\prod_{i=1}^{N}\left(\int\left||u|^{m-1}\frac{\partial u}{\partial x_i}+(m-1)|u|^{m-2}u\frac{\partial u}{\partial x_i}\right|dx\right)^{1/N} \\
+        &\leq m\prod_{i=1}^{N}\left\||u|^{m-1}\frac{\partial u}{\partial x_i}\right\|_1^{1/N}\leq m\prod_{i=1}^{N}\left\||u|^{m-1}\right\|_{p'}^{1/N}\left\|\frac{\partial u}{\partial x_i}\right\|_p^{1/N} \\
+        &=m\left(\int|u|^{p'(m-1)}\right)^{1/p'}\prod_{i=1}^{N}\left\|\frac{\partial u}{\partial x_i}\right\|_p^{1/N} \\
+        &=m\|u\|_{p'(m-1)}^{m-1}\prod_{i=1}^{N}\left\|\frac{\partial u}{\partial x_i}\right\|_p^{1/N}
+    \end{align*}
+    where $\frac{1}{p}+\frac{1}{p'}=1$, and we are done.
+\end{proof}
+
+\begin{Th} 
+    We have $W^{1,N}(\mathbb{R}^N)\subset\mathscr{L}^{q}(\mathbb{R}^N)$ for $q\in[N, \infty)$.
+\end{Th}
+
+\begin{proof}
+    First assume $u\in\mathscr{C}^{1}_{c}(\mathbb{R}^N)$, and then apply previous estimate on $p=N$, we have
+    \begin{align*}
+        \|u\|_{mN/(N-1)}^{m}&\leq m\|u\|_{(m-1)N/(N-1)}^{m-1}\prod_{i=1}^{N}\left\|\frac{\partial u}{\partial x_i}\right\|_N^{1/N} \\
+        &\leq m\|u\|^{m-1}_{(m-1)N/(N-1)}\frac{1}{N}\sum\limits_{i=1}^{N}\left\|\frac{\partial u}{\partial x_i}\right\|_{N} \\
+        &\leq m\|u\|^{m-1}_{(m-1)N/(N-1)}\|Du\|_{N}
+    \end{align*}
+    where the last inequality follows from the estimate $\left|\frac{\partial u}{\partial x_i}\right|\leq |Du|$.
+
+    Now apply one version of Young's inequality, 
+    \begin{align*}
+        \|u\|_{mN/(N-1)}&\leq m^{1/m}\|u\|^{(m-1)/m}_{(m-1)N/(N-1)}\|Du\|_{N}^{1/m} \\
+        &\leq m^{1/m}\left((1-1/m)\|u\|_{(m-1)N/(N-1)}+1/m\|Du\|_N\right) \\
+        &\leq m^{1/m}(\|u\|_{(m-1)N/(N-1)}+\|Du\|_{N}) \\
+        &\leq C(\|u\|_{(m-1)N/(N-1)}+\|Du\|_{N}) 
+    \end{align*}
+    Choose $m=N$, we have 
+    \begin{align}
+        \|u\|_{N^2/(N-1)}\leq C\|u\|_{W^{1, N}}
+    \end{align}
+    \indent Finally we apply the interpolation inequality, with estimates of two boundary case $\|u\|_{N}\leq \|u\|_{W^{1, N}}$ and $(4)$, we obtain 
+    $$
+        \|u\|_{q}\leq\|u\|^\theta_{N}\cdot\|u\|^{1-\theta}_{N^2/(N-1)}\leq C^{1-\theta}\|u\|_{W^{1, N}}
+    $$ where $C$ could be chosen such that we can omit the power, thus proved the desired embedding.
+\end{proof}
 
 \subsection{General Sobolev inequality}
 
 \indent\indent In this section, we generalize our embedding by considering not only $W^{1, p}$ spaces but $W^{k,p}$ spaces, an in turn we get (as expected) more complicated embeddings. 
 
+\begin{Th}
+    Let $U$ be a bounded open subset of $\mathbb{R}^n$, with $\mathscr{C}^1$ boundary. Assume that $u\in W^{k,p}$. \\
+    \indent (i) If $k<\frac{n}{p}$, then $u\in\mathscr{L}^{q}(U)$, where $\frac{1}{q}=\frac{1}{p}-\frac{k}{n}$. We also have the estimate 
+    $$
+    \|u\|_{\mathscr{L}^q(U)}\leq C\|u\|_{W^{k,p}(U)}.
+    $$
+    \indent (ii) If $k>\frac{n}{p}$, then $u\in\mathscr{C}^{k-[\frac{n}{p}]-1, \gamma}$, where 
+    $$
+    \gamma = \begin{cases}
+  & [\frac{n}{p}]+1-\frac{n}{p}, \ \text{ if } \frac{n}{p} \text{ is not an integer}\\
+  & \text{any positive number } < 1,\  \text{ if } \frac{n}{p} \text{ is an integer}
+\end{cases}
+    $$ We have in addition the estimate 
+    $$
+    \|u\|_{\mathscr{C}^{k-[\frac{n}{p}]-1, \gamma}(\overline{U})}\leq C\|u\|_{W^{k,p}(U)}.
+    $$
+\end{Th}
 
+\begin{proof}
+    Case (i) is not hard, see textbook for reference. The only remark is that for $|\beta|\leq k-1$, $v:= D^\beta u\in W^{1, p}$, given that $Dv=D^{\beta+1}u\in\mathscr{L}^p$ as $|\beta| + 1\leq k$. \\
+    \indent Case (ii) for non-integer $\frac{n}{p}$, apply the same process in Case (i), we may get $u\in W^{k-l, r}$ where $l<\frac{n}{p}<l+1$ and $\frac{1}{r}=\frac{1}{p}-\frac{l}{n}$, and $r=\frac{np}{n-pl}>n$. We may apply Morrey's inequality. \\
+    \indent Case (ii) for integer $\frac{n}{p}$, then set $l=\left[\frac{n}{p}\right]-1=\frac{n}{p}-1$, then the corresponding $r=\frac{np}{n-pl}=n$. By Theorem 3 before, we have $D^\alpha u\in\mathscr{L}^{q}(U)$ for all $q\geq n$ and all $|\alpha|\leq k-l-1=k-\left[\frac{n}{p}\right]$, therefore apply Morrey's inequality implies that $D^\alpha u\in\mathscr{C}^{0, 1-\frac{n}{q}}(\overline{U})$ for all $n<q<\infty$ and all $|\alpha|\leq k-\left[\frac{n}{p}\right]-1$, then $u\in\mathscr{C}^{k-\left[\frac{n}{p}\right]-1,\gamma}(\overline{U})$ for $0<\gamma<1$.
+\end{proof}
 
 \end{document}
