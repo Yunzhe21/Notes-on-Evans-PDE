@@ -6,7 +6,7 @@
 ## Before Reading
 This is my reading notes of Evans "Partial Differential Equations" Second Edition. 
 
-I'm not intending to copy the whole Evans Book, but instead I focuses mostly on explaining missing thought process during the proof that the author might just find it either trivial or just tedius, 
+I'm not intending to copy the whole Evans Book, but instead I focuses mostly on explaining missing thought process during the proof that the author might just find it either trivial or just tedious, 
 remarks that are left as excercises, and adding some additional content from other textbook(s).
 
 I may also upload my own solution to some of the excercises in the future.
