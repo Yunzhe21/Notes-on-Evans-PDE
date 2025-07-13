@@ -4,7 +4,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathrsfs}
-\usepackage{stix}
+\usepackage[T1]{fontenc}
+\usepackage{esint}
 
 \title{Notes on Evans PDE, Chapter 5.6}
 \author{Yunzhe Zheng}
@@ -88,7 +89,7 @@ Refer to textbook for the exact statement and proof.
 \begin{Lem}
     There exists a constant $C$ depending on $n$ such that 
     $$
-    \intbar_{B(x,r)}|u(y)-u(x)|dy\leq\int_{B(x,r)}\frac{|Du(y)|}{|y-x|^{n-1}}dy
+    \fint_{B(x,r)}|u(y)-u(x)|dy\leq\int_{B(x,r)}\frac{|Du(y)|}{|y-x|^{n-1}}dy
     $$
     for $u\in\mathscr{C}^1(\mathbb{R}^n)$.
 \end{Lem} 
