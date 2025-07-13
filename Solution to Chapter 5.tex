@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[all]{xy}
+
+
+\usepackage{amsmath,amsthm,amssymb,color, mathrsfs}
+\usepackage{geometry}        
+\geometry{letterpaper}    
+\usepackage{graphicx}
+
+\newcommand{\legendre}[2]{\ensuremath{\left( \frac{#1}{#2} \right) }}
+\newtheorem{problem}{Problem}
+
+\newenvironment{solution}[1][\it{Solution}]{\textbf{#1. } }{$\square$}
+
+
+\begin{document}
+\noindent Evans PDE Solutions \hfill Chapter 5\\
+Yunzhe Zheng. (2025/07)
+
+\hrulefill
+
+\begin{problem}
+Use the Fourier transform to prove that if $u\in H^s(\mathbb{R}^n)$ for $s>n/2$, then $u\in\mathscr{L}^\infty$ with the bound 
+$$
+\|u\|_{\mathscr{L}^\infty(\mathbb{R}^n)}\leq C\|u\|_{H^s(\mathbb{R}^n)}
+$$
+for a constant $C$ depending only on $s$ and $n$. (Evans 5.10.20)
+\end{problem}
+
+\textbf{Proof:} Since 
+$$
+u=\check{\hat{u}}=\int_{\mathbb{R}^n}e^{ixy}\hat{u}dy
+$$
+we have 
+$$
+|u|\leq \int_{\mathbb{R}^n}|\hat{u}|\cdot|e^{ixy}|dx=\|\hat{u}\|_{\mathscr{L}^1(\mathbb{R}^n)}
+$$
+Then we are left to prove $\|\hat{u}\|_{\mathscr{L}^1(\mathbb{R}^n)}\leq C\|u\|_{H^s(\mathbb{R}^n)}$, and we do this by noticing
+\begin{align*}
+    \int_{\mathbb{R}^n}|\hat{u}|dx&=\int_{\mathbb{R}^n}\frac{1}{|1+|y|^s|}\cdot|1+|y|^s|\cdot|\hat{u}|dy \\
+    &\leq \left\|\frac{1}{|1+|y|^s|}\right\|_{\mathscr{L}^2}\cdot\left\|(1+|y|^s)\hat{u}\right\|_{\mathscr{L}^2}
+\end{align*}
+by applying the Holder inequality. Notice that $\frac{1}{1+|y|^s}$ is $\mathscr{L}^2$-integrable when $s>n/2$, and to see that, we calculate
+\begin{align*}
+    \int_{\mathbb{R}^n}\frac{1}{|1+|y||^2}dy&=c(n)\int_0^\infty\frac{r^{n-1}}{(1+r^s)^2}dy \\
+    &\leq c(n)\int_{0}^{\infty}\frac{r^{n-1}}{1+r^{2s}}dy \\
+    &\leq c(n)\int_0^\infty r^{n-2s-1}dy \leq C(n, p)
+\end{align*}
+where $c(n)$ is the area of a unit sphere. \qed
+\\
+\begin{problem}
+Show that if $u, v\in H^s(\mathbb{R}^n)$ for $s>n/2$, then $uv\in H^s(\mathbb{R}^n)$ and 
+$$
+\|uv\|_{H^s(\mathbb{R}^n)}\leq C\|u\|_{H^s(\mathbb{R}^n)}\|v\|_{H^s(\mathbb{R}^n)}
+$$
+the constant $C$ depending only on $s$ and $n$. (Evans 5.10.21)
+\end{problem}
+
+\textbf{Proof:} Since we know that 
+$$
+\widehat{uv}=\hat{u}*\hat{v}
+$$
+we estimate the term
+\begin{align*}
+    \left|(1+|y|^s)\int_{\mathbb{R}^n}\hat{u}(x)\hat{v}(x-y)dx\right|^2&=\left|\int_{\mathbb{R}^n}\frac{(1+|y|^s)\cdot(1+|x|^s)\hat{u}(x)\cdot(1+|x-y|^s)\hat{v}(x-y)}{(1+|x|^s)(1+|x-y|^s)}dx\right|^2 \\
+    &\leq \int_{\mathbb{R}^n}\left|\frac{1+|y|^s}{(1+|x|^s)(1+|x-y|^s)}\right|^2dx\cdot\int_{\mathbb{R}^n}\left|G(x)\cdot H(x-y)\right|^2dx
+\end{align*}
+where $G(x)=(1+|x|^s)\hat{u}(x)$ and $H(x)=(1+|x|^s)\hat{v}(x)$.
+
+The Cauchy-Schwarz inequality holds since first of all $G^2(x)$ and $H^2(x-y)$ are $\mathscr{L}^1$ given $G,H\in\mathscr{L}^2$, then the second term of the right hand side is the convolution of two $\mathscr{L}^1$ function, which is in $\mathscr{L}^1$. Same reason for the first term if we consider the function $h(x)=\frac{1}{1+|x|^s}$. \\
+\indent Now integrate both sides over $y$, and before doing so, we want the first term of the right hand side to not only integrable, but also bounded by a constant independent of $x,y$. We do so (for fixed $y$) by 
+\begin{align}
+    \int_{\mathbb{R}^n}\left|\frac{1+|y|^s}{(1+|x|^s)(1+|x-y|^s)}\right|^2dx &= \int_{|y|>|x|/2}\left|\frac{1+|y|^s}{(1+|x|^s)(1+|x-y|^s)}\right|^2dx \\
+    &+\int_{|y|\leq |x|/2}\left|\frac{1+|y|^s}{(1+|x|^s)(1+|x-y|^s)}\right|^2dx
+\end{align}
+For $|x|\leq |y|/2$, $|x-y|\geq |y|-|x|\geq |y|/2$
+\begin{align*}
+    \frac{(1+|y|^s)^2}{(1+|x|^s)^2(1+|x-y|^s)^2}\leq \frac{(1+|y|^s)^2}{(1+|x|^s)^2(1+|y/2|^s)^2}\leq \frac{2^{s+1}(1+|y|^s)^2}{(1+|x|^s)^2(1+|y|^s)^2}=\frac{2^{s+1}}{(1+|x|^s)^2}
+\end{align*}
+For $|x|>|y|/2$,
+\begin{align*}
+    \frac{(1+|y|^s)^2}{(1+|x|^s)^2(1+|x-y|^s)^2}\leq \frac{2^{s+1}(1+|y|^s)^2}{(1+|y|^s)^2(1+|x-y|^s)^2}=\frac{2^{s+1}}{(1+|x-y|^s)^2}
+\end{align*}
+Thus 
+$$
+\int_{\mathbb{R}^n}\left|\frac{1+|y|^s}{(1+|x|^s)(1+|x-y|^s)}\right|^2dx\leq C(n,s)
+$$
+
+Finally, we calculate
+\begin{align*}
+    \int_{\mathbb{R}^n}\left|(1+|y|^s)\int_{\mathbb{R}^n}\hat{u}(x)\hat{v}(x-y)dx\right|^2dy&\leq C(n, s)\int_{\mathbb{R}^n}\int_{\mathbb{R}^n}|G(x)|^2|H(x-y)|^2dxdy \\
+    &=C(n,s)\int_{\mathbb{R}^n}|G(x)|^2\int_{\mathbb{R}^n}|H(x-y)|^2dydx \\
+    &=C(n,s)\|u\|_{H^s(\mathbb{R}^n)}\|v\|_{\mathbb{R}^n}
+\end{align*} \qed
+
+
+
+\end{document}
