@@ -4,12 +4,12 @@
   - 5.6 Sobolev embedding
 
 ## Before Reading
-This is my reading notes of Evans "Partial Differential Equations" Second Edition. 
+Here are my reading notes for Evans "Partial Differential Equations" Second Edition. 
 
-I'm not intending to copy the whole Evans Book, but instead I focuses mostly on explaining missing thought process during the proof that the author might just find it either trivial or just tedious, 
-remarks that are left as excercises, and adding some additional content from other textbook(s).
+I don't intend to reproduce the whole textbook, but focus instead on explaining missing thought processes in proofs (which the author might find either trivial or tedious), 
+elaborating on remarks left as excercises, and supplementing with content from other textbook(s).
 
-I may also upload my own solution to some of the excercises in the future.
+I also share my own solutions to some of the excercises in this repo.
 
 ## Additional Reference 
 
