@@ -2,6 +2,7 @@
 
 - Chapter 5 Sobolev Spaces
   - 5.6 Sobolev embedding
+  - 5.10 Exercises 20, 21
 
 ## Before Reading
 Here are my reading notes for Evans "Partial Differential Equations" Second Edition. 
