@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[T1]{fontenc}
+\usepackage{esint}
+
+\title{Notes on Evans PDE, Chapter 5.9}
+\author{Yunzhe Zheng}
+\date{2025.7}
+
+\begin{document}
+
+\maketitle
+
+\section{Other Spaces of Functions}
+
+\indent\indent This section requires basic knowledge of Functional Analysis. I will include necessary definitions and theorems in the note. You can find more in the appendix, but not all of them are needed here, and I shall include proofs of some statements there.
+
+\subsection{Space of $H^{-1}$}
+\indent\indent The construction of $H^{-1}$ requires the following definitions.
+\newtheorem{Def}{Definition}[section]
+
+\subsubsection{Elements of Functional Analysis}
+\begin{Def}
+    A bounded linear operator $u^*: X\to\mathbb{R}$ is called a bounded linear functional on $X$. Here $X$ is a Banach Space.
+\end{Def}
+
+\begin{Def}
+    We write $X^*$ to denote the collection of all bounded linear functionals on $X$, called the Dual Space of $X$.
+\end{Def}
+
+\begin{Def}
+    If $u\in X$, $u^*\in X^*$, we write $\langle u^*, u\rangle$ to denote the real number $u^*(u)$.
+\end{Def}
+
+\subsubsection{$H^{-1}$}
+
+\begin{Def}
+    $H^{-1}$ is the dual space to $H_{0}^1$, and its norm is defined as $\sup\left\{\langle f,u\rangle: u\in H^{1}_{0}, \|u\|_{H_{0}^{1}(U)\leq 1}\right\}$
+\end{Def}
+
+\subsubsection{Characterization of $H^{-1}$}
+
+We observe one way of characterizing $H^{-1}$ by $\mathscr{L}^2$ functions.
+
+\newtheorem{Th}{Theorem}
+\begin{Th}
+    (i) Assume that $f\in H^{-1}(U)$. Then there exist functions $f^0, f^1, \dots, f^n$ in $\mathscr{L}^2(U)$ such that 
+    $$
+    \langle f,v\rangle =\int_{U}f^0v+\sum\limits_{i=1}^{n}f^iv_{x_i}dx
+    $$ \\
+    (ii) Furthermore, 
+    $$
+    \|f\|_{H^{-1}(U)}=\inf\left\{\left(\int_{U}\sum\limits_{i=1}^n\left|f^i\right|^2\right)^{1/2}: f\text{ satisfies previous relation}\right\}
+    $$\\
+    (iii) In particular, we have 
+    $$
+    (u,v)_{\mathscr{L}^2(U)}=\langle u,v\rangle
+    $$ for all $u\in H^{1}_{0}(U)$, $v\in\mathscr{L}^2(U)\subset H^{-1}(U)$.
+\end{Th}
+
+\begin{proof}
+    
+\end{proof}
+
+\end{document}
