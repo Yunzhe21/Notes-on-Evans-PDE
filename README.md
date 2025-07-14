@@ -2,6 +2,7 @@
 
 - Chapter 5 Sobolev Spaces
   - 5.6 Sobolev embedding
+  - 5.9 Other Spaces of Functions 
   - 5.10 Exercises 20, 21
 
 ## Before Reading
