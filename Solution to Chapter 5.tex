@@ -30,11 +30,11 @@ for a constant $C$ depending only on $s$ and $n$. (Evans 5.10.20)
 
 \textbf{Proof:} Since 
 $$
-u=\check{\hat{u}}=\int_{\mathbb{R}^n}e^{ixy}\hat{u}dy
+u=\check{\hat{u}}=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}e^{ixy}\hat{u}dy
 $$
 we have 
 $$
-|u|\leq \int_{\mathbb{R}^n}|\hat{u}|\cdot|e^{ixy}|dx=\|\hat{u}\|_{\mathscr{L}^1(\mathbb{R}^n)}
+|u|\leq \frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}|\hat{u}|\cdot|e^{ixy}|dx=\frac{1}{(2\pi)^n}\|\hat{u}\|_{\mathscr{L}^1(\mathbb{R}^n)}
 $$
 Then we are left to prove $\|\hat{u}\|_{\mathscr{L}^1(\mathbb{R}^n)}\leq C\|u\|_{H^s(\mathbb{R}^n)}$, and we do this by noticing
 \begin{align*}
@@ -59,7 +59,7 @@ the constant $C$ depending only on $s$ and $n$. (Evans 5.10.21)
 
 \textbf{Proof:} Since we know that 
 $$
-\widehat{uv}=\hat{u}*\hat{v}
+\widehat{uv}=\frac{1}{(2\pi)^n}\hat{u}*\hat{v}
 $$
 we estimate the term
 \begin{align*}
@@ -94,6 +94,17 @@ Finally, we calculate
     &=C(n,s)\|u\|_{H^s(\mathbb{R}^n)}\|v\|_{\mathbb{R}^n}
 \end{align*} \qed
 
-
+\textbf{Remark:} Now we prove the following:
+$$
+\widehat{uv}=\frac{1}{(2\pi)^n}\cdot\hat{u}*\hat{v}
+$$
+\textbf{Proof:} 
+\begin{align*}
+    \widehat{uv}(y)&=\frac{1}{(2\pi)^{n/2}}\int_{\mathbb{R}^n}u(x)v(x)e^{-ixy}dx=\frac{1}{(2\pi)^{n/2}}\int_{\mathbb{R}^n}u(x)\check{\hat{u}}(x)e^{-ixy}dx \\
+    &=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}e^{-ixy}u(x)\int_{\mathbb{R}^n}\hat{v}(t)e^{itx}dtdx \\
+    &=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}\hat{v}(t)\int_{\mathbb{R}^n}u(x)e^{-ix(y-t)}dxdt \\
+    &=\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}\hat{v}(t)\hat{u}(y-t)dt \\
+    &=\frac{1}{(2\pi)^n}\cdot\hat{u}*\hat{v} 
+\end{align*}\qed
 
 \end{document}

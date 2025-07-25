@@ -63,7 +63,234 @@ We observe one way of characterizing $H^{-1}$ by $\mathscr{L}^2$ functions.
 \end{Th}
 
 \begin{proof}
-    
+    The essence of the proof is to define an inner product for $u,v\in H_0^1(U)$
+    $$
+        (u, v)=\int_{U}(Du\cdot Dv+uv)dx.
+    $$ and apply the Riesz Representation Theorem. The rest please refer to textbook. \\
+    \indent But there are several calculation details that worth more elaborations. First in the second bullet point of the proof, after setting $v=u$, the author state without much explanation that 
+    $$
+        \int_{U}(|Du|^2+|u|^2)dx\leq \int_{U}\sum\limits_{i=0}^n|g^i|^2dx
+    $$
+    To see why, we apply Cauchy-Schwarz inequality
+    \begin{align*}
+        \langle f,u\rangle =\int_U g^0u + \sum\limits_{i=1}^ng^iu_{x_i}dx=\int_U\textbf{g}\cdot\textbf{u}dx\leq\int_U (|\textbf{g}|^2+|\textbf{u}|^2)/2dx
+    \end{align*}
+    where $\textbf{g}=(g^0, g^1, \dots, g^n)$ and $\textbf{u}=(u, u_{x_1}, \dots, u_{x_n})$. Combining withe the fact that $\langle f,v\rangle=\int_{U}(|Du|^2+|u|^2)dx$, we obtain the desired inequality. \\
+    \indent Secondly, in the third bullet point of the proof, Evans claimed that 
+    $$
+    \left|\langle f, v\rangle\right|\leq \left(\int_U\sum\limits_{i=0}^n|f^i|^2dx\right)^{1/2}
+    $$
+    The reason is as follows
+    \begin{align*}
+        \left|\langle f, v\rangle\right|&=\left|\int_U\left(f^0v+\sum\limits_{i=1}^{n}f^iv_{x_i}\right)dx\right|\leq \left|\int_Uf^0vdx\right|+\sum\limits_{i=1}^{n}\left|\int_{U}f^iv_{x_i}dx\right| \\
+        &\leq \left(\int_U|f^0|^2dx\right)^{1/2}\left(\int_U|v|^2dx\right)^{1/2}+\sum\limits_{i=1}^{n}\left(\int_U|f^i|^2dx\right)^{1/2}\left(\int_U|v_{x_i}|^2dx\right)^{1/2} \\
+        &= \sum\limits_{i=0}^{n}\|f^i\|_{\mathscr{L}^2}\cdot\|v_{x_i}\|_{\mathscr{L}^2}
+    \end{align*}
+    by Cauchy-Schwarz inequality for $\mathscr{L}^2$ functions.
+    \begin{align*}
+        \left|\langle f, v\rangle\right| &\leq \left(\sum\limits_{k=0}^n\int_U|f^k|^2dx\right)^{1/2}\cdot\left(\|v\|_{\mathscr{L}^2}+\sum\limits_{i=1}^n\|v_{x_i}\|_{\mathscr{L}^2}\right)^{1/2} \\
+        &= \left(\int_{U}\sum\limits_{k=0}^n|f^k|^2dx\right)^{1/2}\cdot \|v\|_{H_0^1(U)} \\
+        &\leq \left(\int_{U}\sum\limits_{k=0}^n|f^k|^2dx\right)^{1/2}
+    \end{align*} whenever $\|v\|_{H_0^1(U)}\leq 1$ \\
+    \indent Finally, in order to deduce formula got $H^{-1}$ norm, Evans says it can be done by setting $v=\frac{u}{\|u\|_{H_0^1(U)}}$. To be more specific, we calculate
+    \begin{align*}
+        \left\langle f,\frac{u}{\|u\|_{H_o^1}}\right\rangle=\int_U \frac{Du\cdot Du}{\|u\|_{H_0^1}}+\frac{u^2}{\|u\|_{H_0^1}}dx=\frac{\|u\|^2_{H_0^1}}{\|u\|_{H_0^1}}=\|u\|^2_{h_0^1}
+    \end{align*} thus by definition, $\|f\|_{H^-{-1}}\geq \|u\|_{H^1_0(U)}$.
+\end{proof}
+
+\subsection{Spaces involving time}
+
+\indent\indent In this subsection we study Sobolev spaces that maps time into Banach Spaces (rather than just real number), and we may surprisingly get some "calculus"-like properties.
+
+\begin{Def}
+    The space $\mathscr{L}^p(0, T; X)$ consists of all strongly measurable functions $\textbf{u}: [0, T]\to X$ with 
+    $$
+        \|\textbf{u}\|_{\mathscr{L}^p(0, T;X)}:= \left(\int_0^T\|\textbf{u}(t)\|^pdt\right)^{1/p}<\infty
+    $$ for $1\leq p<\infty$, and
+    $$
+    \|u\|_{\mathscr{L}^\infty(0,T; X)}:= \text{ess}\sup\limits_{0\leq t\leq T}\|\textbf{u}(t)\|<\infty
+    $$
+\end{Def}
+
+\begin{Def}
+    The space $\mathscr{C}([0, T]; X)$ comprises all continuous functions $\textbf{u}: [0, T]\to X$ with 
+    $$
+    \|\textbf{u}\|_{\mathscr{C}([0, T]; X)}:= \max_{0\leq t\leq T}\|\textbf{u}(t)\|<\infty
+    $$
+\end{Def}
+
+\indent Next is the definition of weak derivative, which is almost identical to the usual one.
+
+\begin{Def}
+    Let $\textbf{u}\in\mathscr{L}^1(0,T; X)$. We say $\textbf{v}\in\mathscr{L}^1(0,T;X)$ is the weak derivative of $\textbf{u}$, written 
+    $$
+        \textbf{u}'=\textbf{v}
+    $$
+    provided 
+    $$
+    \int_0^T\phi'(t)\textbf{u}(t)dt=-\int_0^T\phi(t)\textbf{v}(t)dt
+    $$ for all real valued test functions $\phi\in\mathscr{C}_c^\infty(0,T)$.
+\end{Def}
+
+\indent In light of the definition of weak derivative, we define Sobolev Spaces involving time.
+
+\begin{Def}
+    The Sobolev space $W^{1,p}(0, T; X)$ consists of all functions $\textbf{u}\in\mathscr{L}^p(0,T;X)$ such that $\textbf{u}'$ exists in the weak sense and belongs to $\mathscr{L}^p(0,T;X)$. Furthermore, 
+    $$\|u\|_{\mathscr{C}([0,T];X)}:=\begin{cases}
+  \left(\int_{0}^T\|\textbf{u}(t)\|^p+\|\textbf{u}'(t)\|^pdt\right)^{1/p}& (1\leq p<\infty) \\
+  \text{ess}\sup\limits_{0\leq t\leq T}(\|\textbf{u}(t)\|+\|\textbf{u}'(t)\|)& (p=\infty)
+    \end{cases}$$
+\end{Def}
+
+Done with all the definitions, we now observe that $W^{1,p}(0,T; X)$ can be naturally embedding in $\mathscr{C}(0,T; X)$ up to redefined on a measure zero set, and we can also do normal calculus operations (Fundamental Theorem of Calculus). 
+
+\begin{Th}
+    Let $\textbf{u}\in W^{1, p}(0,T; X)$ for some $1\leq p\leq\infty$. Then $\textbf{u}\in\mathscr{C}([0, T]; X)$ after possibly being redefined on a set of measure zero. Furthermore we have 
+    $$
+    \textbf{u}(t)=\textbf{u}(s)+\int_s^t\textbf{u}'(r)dr
+    $$ for all $0\leq s\leq t\leq T$ and the estimate 
+    $$
+    \max_{0\leq t\leq T}\|\textbf{u}(t)\|\leq C\|\textbf{u}\|_{W^{1, p}(0, T; X)}
+    $$ where the constant $C$ only depends on $T$.
+\end{Th}
+
+\begin{proof} The proof utilizes mollifier to turn $\textbf{u}$ into smooth function, where we are able to use Fundamental Theorem of Calculus. \\
+In the proof, there are some technical details worth noting. First, Evans defines $\textbf{u}^\epsilon=\eta_{\epsilon}*\textbf{u}$ and claims that $\textbf{u}^\epsilon\to\textbf{u}$ in $\mathscr{L}^p(0,T;X)$. The reason is as follows, 
+\begin{align*}
+    \|\textbf{u}^\epsilon-\textbf{u}\|_{\mathscr{L}^p(0, T; X)}=\left(\int_0^T\|\textbf{u}^\epsilon(t)-\textbf{u}(t)\|^pdt\right)^{1/p}
+\end{align*}
+where 
+\begin{align*}
+    \|\textbf{u}^\epsilon(t)-\textbf{u}(t)\|&=\left\|\int_{(0, \epsilon)}\eta_{\epsilon}(y)\textbf{u}(t-y)dy-\int_{(0, \epsilon)}\eta_{\epsilon}(y)\textbf{u}(t)dy\right\| \\
+    &=\left\|\int_{(0, \epsilon)}\eta_{\epsilon}(y)\left[\textbf{u}(t-y)-\textbf{u}(t)\right]dy\right\| \\
+    &\leq \int_{(0, \epsilon)}\eta_{\epsilon}(y)\left\|\textbf{u}(t-y)-\textbf{u}(t)\right\|dy
+\end{align*}
+then 
+\begin{align*}
+    \int_0^T\left(\|\textbf{u}^\epsilon(t)-\textbf{u}(t)\|\right)^pdt&\leq\int_0^T\left(\int_{(0, \epsilon)}\eta_\epsilon(y)\|\textbf{u}(t-y)-\textbf{u}(t)\|dy\right)^pdt \\
+    &\leq \int_{0}^TC\int_{(0, \epsilon)}\eta^p_\epsilon(y)\|\textbf{u}(t-y)-\textbf{u}(t)\|^pdydt \\
+    &=C\int_{(0, \epsilon)}\eta^p_\epsilon(y)\int_0^T\|\textbf{u}(t-y)-\textbf{u}(t)\|^pdtdy 
+\end{align*}
+and by translation continuity of $\mathscr{L}^p$ function, we can control the inner integral by $\delta$ arbitrarily small by choosing $\epsilon$ small enough, then the upper bound will be an infinitesimal, thus obtaining the desired convergence. \\
+\indent Finally, in the proof of the estimate, Evans says that it follows easily from 
+$$
+\textbf{u}(t)=\textbf{u}(s)+\int_{s}^t\textbf{u}'(\tau)d\tau
+$$
+The reason is as follows
+\begin{align*}
+    \|\textbf{u}(t)\|&\leq \|\textbf{u}(s)\|+\int_s^t\|\textbf{u}'(\tau)\|d\tau \leq \|\textbf{u}(s)\|+\int_0^t\|\textbf{u}'(\tau)d\|d\tau \\
+    &\leq \|\textbf{u}(s)\|+T^{1-1/p}\|\textbf{u}'\|_{\mathscr{L}^p(0,T;X)} 
+\end{align*}
+by integrating over $s$, and notice that $(a+b)^p\leq 2^p(a^p+b^p)$, we may obtain 
+\begin{align*}
+    \int\|\textbf{u}(t)\|^pds\leq \int 2^p\left[\|\textbf{u}\|^p+T^{p-1}\|\textbf{u}'\|_{\mathscr{L}^p(0,T;X)}\right]ds
+\end{align*}
+then 
+$$
+T\|\textbf{u}(t)\|^p\leq 2^p\|\textbf{u}(s)\|^p_{\mathscr{L}^p(0,T;X)}+2^pT^p\|\textbf{u}'\|_{\mathscr{L}^p(0,T;X)}^p
+$$ and the estimate follows easily.
+\end{proof}
+
+Evans also introduced other mappings into better spaces.
+
+\begin{Th}
+    Suppose $\textbf{u}\in \mathscr{L}^2(0,T;H_0^1(U))$, with $\textbf{u}'\in \mathscr{L}^2(0,T; H^{-1}(U))$. \\
+    \indent 1. Then 
+    $$
+    \textbf{u}\in\mathscr{C}([0,T]; \mathscr{L}^2(U))
+    $$ after being redefined on a set of measure zero. \\
+    \indent 2. The mapping 
+    $$
+    t\mapsto \|\textbf{u}(t)\|_{\mathscr{L}^2(U)}^2
+    $$ is absolutely continuous, with 
+    $$
+    \frac{d}{dt}\|\textbf{u}(t)\|^2_{\mathscr{L}^2(U)}=2\langle\textbf{u}'(t), \textbf{u}(t)\rangle
+    $$ for a.e. $0\leq t\leq T$. \\
+    \indent 3. Furthermore, we have the estimate 
+    $$
+    \max_{0\leq t\leq T} \|\textbf{u}(t)\|\leq C\left(\|\textbf{u}\|_{\mathscr{L}^2(0,T; H_0^1(U))}+\|\textbf{u}'\|_{\mathscr{L}^2(0,T; H^{-1}(U))}\right)
+    $$ the constant $C$ depending on $T$.
+\end{Th}
+
+\begin{proof}
+    The idea of the proof is to first extend the function $\textbf{u}$ to a slightly larger domain of $[-\sigma,T+\sigma]$, where we can use mollifier to regularize $\textbf{u}$, then use Fundamental Theorem of Calculus on Banach Spaces. \\
+    \indent There are two parts worth mentioning. First, in the proof of (i), Evans says that 
+    $$
+    \|\textbf{u}^\epsilon(t)-\textbf{u}^\delta(t)\|_{\mathscr{L}^2(U)}^2=\|\textbf{u}^\epsilon(s)-\textbf{u}^\delta(s)\|_{\mathscr{L}^2(U)}^2+2\int_s^t\langle\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau), \textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\rangle d\tau
+    $$ implies 
+    \begin{align*}
+        \limsup_{\epsilon,\delta\to0} \sup_{0\leq t\leq T} \|\textbf{u}^\epsilon(t)-\textbf{u}^\delta(t)\|_{\mathscr{L}^2(U)}^2 \leq \lim_{\epsilon,\delta\to 0}\int_0^T\|\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau)\|_{H^{-1}(U)}^2 \\
+        +\|\textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\|_{H_0^1(U)}^2d\tau
+    \end{align*}
+    The reason is as follows: Since 
+    \begin{align*}
+        \left|\langle\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau), \textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\rangle \right|\leq \|\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau)\|_{H^{-1}(U)}\cdot \|\textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\|_{H_0^1(U)}
+    \end{align*}
+    thus 
+    \begin{align*}
+        \int_s^t\langle\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau), \textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\rangle d\tau\leq \int_s^t \|\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau)\|_{H^{-1}(U)} \\
+        \cdot \|\textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\|_{H_0^1(U)}d\tau
+    \end{align*}
+    then 
+    \begin{align*}
+        \|\textbf{u}^\epsilon(t)-\textbf{u}^\delta(t)\|_{\mathscr{L}^2(U)}^2\leq \|\textbf{u}^\epsilon(s)-\textbf{u}^\delta(s)\|_{\mathscr{L}^2(U)}^2 + \int_s^t \|\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau)\|_{H^{-1}(U)} \\
+        \cdot \|\textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\|_{H_0^1(U)}d\tau 
+    \end{align*}
+    Since we know 
+    \begin{align*}
+        \|\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau)\|_{H^{-1}(U)}
+        \cdot \|\textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\|_{H_0^1(U)}\leq \frac{1}{2}\|\textbf{u}^{\epsilon'}(\tau)-\textbf{u}^{\delta'}(\tau)\|_{H^{-1}(U)}^2+ \\
+        \frac{1}{2}\|\textbf{u}^\epsilon(\tau)-\textbf{u}^\delta(\tau)\|_{H_0^1(U)}^2
+    \end{align*}
+    By the fact that $\textbf{u}^\epsilon(s)\to\textbf{u}(s)$ in $\mathscr{L}^2$ for a.e. $s\in(0,T)$, we may obtain the desired conclusion. \\
+    \indent Finally, in order to obtain the estimate in (iii), Evans says we should integrate 
+    $$
+    \|\textbf{u}(t)\|_{\mathscr{L}^2(U)}^2=\|\textbf{u}(s)\|_{\mathscr{L}^2}^2+2\int_s^t\langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau 
+    $$ and do some simple estimates, to be more specific, we calculate
+    \begin{align*}
+        T\|\textbf{u}(t)\|_{\mathscr{L}^2(U)}^2=\int_0^T\|\textbf{u}(s)\|_{\mathscr{L}^2(U)}^2ds+2\int_0^T\int_s^t\langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau ds
+    \end{align*}
+    where 
+    \begin{align*}
+        \int_0^T\int_s^t \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau ds&=\int_s^t\int_0^T \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle dsd\tau \\
+        &= \int_0^t\int_0^\tau\langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle dsd\tau + \int_t^T\int_\tau^T \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle dsd\tau \\
+        &=\int_0^t \tau \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau +\int_t^T (T-\tau) \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau \\
+        &\leq T\int_0^t \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau + T\int_t^T \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau \\
+        &= T\int_0^T \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau
+    \end{align*}
+    Recall the estimate $\langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle\leq \|\textbf{u}'(\tau)\|_{H^{-1}(U)}\cdot\|\textbf{u}(\tau)\|_{H_0^1(U)}$, then
+    \begin{align*}
+        2\int_0^T\int_s^t \langle\textbf{u}'(\tau), \textbf{u}(\tau)\rangle d\tau ds&\leq 2T\int_0^T \|\textbf{u}'(\tau)\|_{H^{-1}(U)}\cdot\|\textbf{u}(\tau)\|_{H_0^1(U)} d\tau \\
+        &\leq 2T\left(\int_0^T \|\textbf{u}'(\tau)\|_{H^{-1}(U)}^2d\tau\right)^{1/2}\cdot\left(\int_0^T\|\textbf{u}(\tau)\|_{H_0^1(U)}^2d\tau \right)^{1/2} \\
+        &=:2T XY
+    \end{align*}
+    Notice that $\|\textbf{u}(s)\|_{\mathscr{L}^2(U)}\leq\|\textbf{u}(s)\|_{H_0^1}$, and the original equation becomes:
+    \begin{align*}
+        T\|\textbf{u}(t)\|_{\mathscr{L}^2(U)}^2\leq Y^2 + 2TXY\leq (Y+TX)^2
+    \end{align*}
+    then
+    \begin{align*}
+        \|\textbf{u}(t)\|^2_{\mathscr{L}^2(U)}\leq \frac{Y}{\sqrt{T}}+\sqrt{T}X\leq C(T)(X+Y)
+    \end{align*}
+    where we simply let $C(T)=\max\{\sqrt{T}, 1/\sqrt{T}\}$
+\end{proof}
+
+\begin{Th}
+    Assume that $U$ is open, bounded, and $\partial U$ is smooth. Take $m$ to be a nonnegative integer. \\
+    \indent Suppose $\textbf{u}\in\mathscr{L}^2(0,T; H^{m+2}(U))$, with $\textbf{u}'\in\mathscr{L}^2(0,T;H^{m+1}(U))$. \\
+    \indent (i) Then 
+    $$
+    \textbf{u}\in\mathscr{C}([0,T]; H^{m+1}(U)) 
+    $$ after redefining on a measure zero set. \\
+    \indent (ii) Furthermore, we have the estimate 
+    $$
+    \max_{0\leq t\leq T}\|\textbf{u}(t)\|_{H^{m+1}(U)}\leq C\left(\|\textbf{u}\|_{\mathscr{L}^2(0,T; H^{m+2}(U))}+\|\textbf{u}'\|_{\mathscr{L}^2(0,T; H^m(U))}\right)
+    $$ where the constant depends only on $T,U,m$.
+\end{Th}
+
+\begin{proof}
+    The general idea of the proof is to utilize difference quotients introduced in 5.8.2 and Theorem 3 (Difference quotients ensures weak derivative and its norm can be controlled) in that section. \\
+    \indent However, when applying it, notice that that theorem apply only on a compactly contained subset of the domain, then we naturally think of using Extension Theorem to first extend our function $\textbf{u}$ by a bit, and the rest of the proof should be clear from the text.
 \end{proof}
 
 \end{document}
